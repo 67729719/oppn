@@ -1,675 +1,219 @@
+<!-- 
+  本代码由 便宜技术博猫 创建
+  技术支持 QQ:2420083841 www.311716.com
+  严禁反编译、逆向等任何形式的侵权行为，违者将追究法律责任
+ -->
 <!DOCTYPE html>
-<html lang="zh" style="font-size: 15.8583px;">
-    <head>
-    <!-- 设定字符集 -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- 偶拍拍你也蛮好 -->
-    <title>简绘AI 你的私人助理-数字化创造时代的智能化工具</title>
-    <!-- oppn.cn opp0.cn ymh8.cn个性展示网站 -->
-    <meta name="keywords" content="简绘AI,超级问答,创意绘画">
-    <!-- 网站描述 -->
-    <meta name="description" content="【简绘AI】数字化创造时代的崛起：智能化工具唤醒创造新力，创造效率提升提升。未来已来，创作效率翻倍提升。opp0.cn偶怕怕0网址， ymh8.cn一抹黑吧站点，oppn.cn偶拍拍你可以不">
-    <!-- Open Graph 协议标签 -->
-    <meta property="og:title" content="简绘AI-数字化创造时代的智能化工具,opp0.cn偶怕怕0网址， ymh8.cn一抹黑吧站点，oppn.cn偶拍拍你可以不">
-    <meta property="og:type" content="website">
-    <!-- 改成你的 -->
-    <meta property="og:description" content="【简绘AI】数字化创造时代的崛起：智能化工具唤醒创造新力，创造效率提升提升。未来已来，创作效率翻倍提升。">
-    <!-- 预加载 -->
-    <!-- 启用360浏览器的极速模式(webkit) -->
-    <meta name="renderer" content="webkit">
-    <!-- 避免IE使用兼容模式 -->
+<html>
+<head>
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta http-equiv="Page-Enter" content="blendTrans(Duration=0.5)">
-    <meta http-equiv="Page-Exit" content="blendTrans(Duration=0.5)">
-    <meta http-equiv="windows-Target" content="_top">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="theme-color" content="#14b8a6">
-    <meta name="generator" content="Astro v2.4.2">
-    <link href="static/iconfont.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/index.082d951a.css">
-    <script type="module" src="static/hoisted.8051735c.js"></script>
-    </head>
-  <body class="dark">
-    <div id="page">
-        <div class="astro-J7PV25F6">
-    <canvas id="canvas" class="astro-SLVZHL3X" width="1903" height="881"> </canvas>
-<script lang="js">
-  function project3D(x, y, z, vars) {
-    var p, d
-    x -= vars.camX
-    y -= vars.camY - 8
-    z -= vars.camZ
-    p = Math.atan2(x, z)
-    d = Math.sqrt(x * x + z * z)
-    x = Math.sin(p - vars.yaw) * d
-    z = Math.cos(p - vars.yaw) * d
-    p = Math.atan2(y, z)
-    d = Math.sqrt(y * y + z * z)
-    y = Math.sin(p - vars.pitch) * d
-    z = Math.cos(p - vars.pitch) * d
-    var rx1 = -1000
-    var ry1 = 1
-    var rx2 = 1000
-    var ry2 = 1
-    var rx3 = 0
-    var ry3 = 0
-    var rx4 = x
-    var ry4 = z
-    var uc = (ry4 - ry3) * (rx2 - rx1) - (rx4 - rx3) * (ry2 - ry1)
-    var ua = ((rx4 - rx3) * (ry1 - ry3) - (ry4 - ry3) * (rx1 - rx3)) / uc
-    var ub = ((rx2 - rx1) * (ry1 - ry3) - (ry2 - ry1) * (rx1 - rx3)) / uc
-    if (!z) z = 0.000000001
-    if (ua > 0 && ua < 1 && ub > 0 && ub < 1) {
-      return {
-        x: vars.cx + (rx1 + ua * (rx2 - rx1)) * vars.scale,
-        y: vars.cy + (y / z) * vars.scale,
-        d: x * x + y * y + z * z,
-      }
-    } else {
-      return { d: -1 }
-    }
-  }
-
-  function elevation(x, y, z) {
-    var dist = Math.sqrt(x * x + y * y + z * z)
-    if (dist && z / dist >= -1 && z / dist <= 1) return Math.acos(z / dist)
-    return 0.00000001
-  }
-
-  function rgb(col) {
-    col += 0.000001
-    var r = parseInt((0.5 + Math.sin(col) * 0.5) * 16)
-    var g = parseInt((0.5 + Math.cos(col) * 0.5) * 16)
-    var b = parseInt((0.5 - Math.sin(col) * 0.5) * 16)
-    return '#' + r.toString(16) + g.toString(16) + b.toString(16)
-  }
-
-  function interpolateColors(RGB1, RGB2, degree) {
-    var w2 = degree
-    var w1 = 1 - w2
-    return [
-      w1 * RGB1[0] + w2 * RGB2[0],
-      w1 * RGB1[1] + w2 * RGB2[1],
-      w1 * RGB1[2] + w2 * RGB2[2],
-    ]
-  }
-
-  function rgbArray(col) {
-    col += 0.000001
-    var r = parseInt((0.5 + Math.sin(col) * 0.5) * 256)
-    var g = parseInt((0.5 + Math.cos(col) * 0.5) * 256)
-    var b = parseInt((0.5 - Math.sin(col) * 0.5) * 256)
-    return [r, g, b]
-  }
-
-  function colorString(arr) {
-    var r = parseInt(arr[0])
-    var g = parseInt(arr[1])
-    var b = parseInt(arr[2])
-    return (
-      '#' +
-      ('0' + r.toString(16)).slice(-2) +
-      ('0' + g.toString(16)).slice(-2) +
-      ('0' + b.toString(16)).slice(-2)
-    )
-  }
-
-  function process(vars) {
-    if (vars.points.length < vars.initParticles)
-      for (var i = 0; i < 5; ++i) spawnParticle(vars)
-    var p, d, t
-
-    p = Math.atan2(vars.camX, vars.camZ)
-    d = Math.sqrt(vars.camX * vars.camX + vars.camZ * vars.camZ)
-    d -= Math.sin(vars.frameNo / 80) / 25
-    t = Math.cos(vars.frameNo / 300) / 165
-    vars.camX = Math.sin(p + t) * d
-    vars.camZ = Math.cos(p + t) * d
-    vars.camY = -Math.sin(vars.frameNo / 220) * 15
-    vars.yaw = Math.PI + p + t
-    vars.pitch = elevation(vars.camX, vars.camZ, vars.camY) - Math.PI / 2
-
-    var t
-    for (var i = 0; i < vars.points.length; ++i) {
-      x = vars.points[i].x
-      y = vars.points[i].y
-      z = vars.points[i].z
-      d = Math.sqrt(x * x + z * z) / 1.0075
-      t = 0.1 / (1 + (d * d) / 5)
-      p = Math.atan2(x, z) + t
-      vars.points[i].x = Math.sin(p) * d
-      vars.points[i].z = Math.cos(p) * d
-      vars.points[i].y +=
-        vars.points[i].vy * t * ((Math.sqrt(vars.distributionRadius) - d) * 2)
-      if (vars.points[i].y > vars.vortexHeight / 2 || d < 0.25) {
-        vars.points.splice(i, 1)
-        spawnParticle(vars)
-      }
-    }
-  }
-
-  function drawFloor(vars) {
-    var x, y, z, d, point, a
-    for (var i = -25; i <= 25; i += 1) {
-      for (var j = -25; j <= 25; j += 1) {
-        x = i * 2
-        z = j * 2
-        y = vars.floor
-        d = Math.sqrt(x * x + z * z)
-        point = project3D(x, y - (d * d) / 85, z, vars)
-        if (point.d != -1) {
-          size = 1 + 15000 / (1 + point.d)
-          a = 0.15 - Math.pow(d / 50, 4) * 0.15
-          if (a > 0) {
-            vars.ctx.fillStyle = colorString(
-              interpolateColors(
-                rgbArray(d / 26 - vars.frameNo / 40),
-                [0, 128, 32],
-                0.5 + Math.sin(d / 6 - vars.frameNo / 8) / 2
-              )
-            )
-            vars.ctx.globalAlpha = a
-            vars.ctx.fillRect(
-              point.x - size / 2,
-              point.y - size / 2,
-              size,
-              size
-            )
-          }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="路上明珠,opp0.cn偶怕怕0网址， ymh8.cn一抹黑吧站点，oppn.cn偶拍拍你可以不，继续用丝歌曲生活，311716.com独家记忆让生命出彩">
+    <meta name="keywords" content="路上明珠,opp0.cn偶怕怕0网址， ymh8.cn一抹黑吧站点，oppn.cn偶拍拍你可以不，继续用丝歌曲生活，311716.com独家记忆让生命出彩">
+    <meta name="author" content="路上明珠,opp0.cn偶怕怕0网址， ymh8.cn一抹黑吧站点，oppn.cn偶拍拍你可以不，继续用丝歌曲生活，311716.com独家记忆让生命出彩">
+    <title>路上明珠,opp0.cn偶怕怕0网址， ymh8.cn一抹黑吧站点，oppn.cn偶拍拍你可以不，继续用丝歌曲生活，311716.com独家记忆让生命出彩</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/onlinewebfonts.css"/>
+    <link rel="stylesheet" type="text/css" href="./assets/css/vno.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/iconfont.css">
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+    <link rel="icon" href="./favicon.ico">
+ <!-- 原有meta和样式链接保持不变 -->
+    <style>
+        /* 新增样式 */
+        .info-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
         }
-      }
-    }
-    vars.ctx.fillStyle = '#82f'
-    for (var i = -25; i <= 25; i += 1) {
-      for (var j = -25; j <= 25; j += 1) {
-        x = i * 2
-        z = j * 2
-        y = -vars.floor
-        d = Math.sqrt(x * x + z * z)
-        point = project3D(x, y + (d * d) / 85, z, vars)
-        if (point.d != -1) {
-          size = 1 + 15000 / (1 + point.d)
-          a = 0.15 - Math.pow(d / 50, 4) * 0.15
-          if (a > 0) {
-            vars.ctx.fillStyle = colorString(
-              interpolateColors(
-                rgbArray(-d / 26 - vars.frameNo / 40),
-                [32, 0, 128],
-                0.5 + Math.sin(-d / 6 - vars.frameNo / 8) / 2
-              )
-            )
-            vars.ctx.globalAlpha = a
-            vars.ctx.fillRect(
-              point.x - size / 2,
-              point.y - size / 2,
-              size,
-              size
-            )
-          }
+
+        .info-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
-      }
-    }
-  }
 
-  function sortFunction(a, b) {
-    return b.dist - a.dist
-  }
-  function getTheme(){
-    return localStorage.getItem("THEME")
-  }
-  function draw(vars) {
-    var theme = getTheme()
-    vars.ctx.globalAlpha = 0.15
-    vars.ctx.fillStyle = theme=="dark"?'#000':"#fff"
-    vars.ctx.fillRect(0, 0, canvas.width, canvas.height)
+        .info-card h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid #14b8a6;
+            padding-left: 15px;
+        }
 
-    drawFloor(vars)
+        .info-card p {
+            color: #e0e0e0;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
 
-    var point, x, y, z, a
-    for (var i = 0; i < vars.points.length; ++i) {
-      x = vars.points[i].x
-      y = vars.points[i].y
-      z = vars.points[i].z
-      point = project3D(x, y, z, vars)
-      if (point.d != -1) {
-        vars.points[i].dist = point.d
-        size = 1 + vars.points[i].radius / (1 + point.d)
-        d = Math.abs(vars.points[i].y)
-        a = 0.8 - Math.pow(d / (vars.vortexHeight / 2), 1000) * 0.8
-        vars.ctx.globalAlpha = a >= 0 && a <= 1 ? a : 0
-        vars.ctx.fillStyle = rgb(vars.points[i].color)
-        if (
-          point.x > -1 &&
-          point.x < vars.canvas.width &&
-          point.y > -1 &&
-          point.y < vars.canvas.height
-        )
-          vars.ctx.fillRect(point.x - size / 2, point.y - size / 2, size, size)
-      }
-    }
-    vars.points.sort(sortFunction)
-  }
+        .beian-footer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.6);
+            padding: 12px 25px;
+            border-radius: 30px;
+            backdrop-filter: blur(8px);
+            display: flex;
+            gap: 15px;
+        }
 
-  function spawnParticle(vars) {
-    var p, ls
-    pt = {}
-    p = Math.PI * 2 * Math.random()
-    ls = Math.sqrt(Math.random() * vars.distributionRadius)
-    pt.x = Math.sin(p) * ls
-    pt.y = -vars.vortexHeight / 2
-    pt.vy = vars.initV / 20 + Math.random() * vars.initV
-    pt.z = Math.cos(p) * ls
-    pt.radius = 200 + 800 * Math.random()
-    pt.color = pt.radius / 1000 + vars.frameNo / 250
-    vars.points.push(pt)
-  }
+        .beian-footer a {
+            color: #8ab4f8;
+            font-size: 14px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
 
-  function frame(vars) {
-    if (vars === undefined) {
-      var vars = {}
-      vars.canvas = document.querySelector('canvas')
-      vars.ctx = vars.canvas.getContext('2d')
-      vars.canvas.width = document.body.clientWidth
-      vars.canvas.height = document.body.clientHeight
-      window.addEventListener(
-        'resize',
-        function () {
-          vars.canvas.width = document.body.clientWidth
-          vars.canvas.height = document.body.clientHeight
-          vars.cx = vars.canvas.width / 2
-          vars.cy = vars.canvas.height / 2
-        },
-        true
-      )
-      vars.frameNo = 0
+        .beian-footer a:hover {
+            opacity: 0.8;
+        }
 
-      vars.camX = 0
-      vars.camY = 0
-      vars.camZ = -14
-      vars.pitch = elevation(vars.camX, vars.camZ, vars.camY) - Math.PI / 2
-      vars.yaw = 0
-      vars.cx = vars.canvas.width / 2
-      vars.cy = vars.canvas.height / 2
-      vars.bounding = 10
-      vars.scale = 500
-      vars.floor = 26.5
+        @media (max-width: 768px) {
+            .info-section {
+                grid-template-columns: 1fr;
+                padding: 30px 15px;
+            }
+            
+            .beian-footer {
+                flex-direction: column;
+                text-align: center;
+                right: 50%;
+                transform: translateX(50%);
+                width: 90%;
+            }
+        }
+    </style>
 
-      vars.points = []
-      vars.initParticles = 700
-      vars.initV = 0.01
-      vars.distributionRadius = 800
-      vars.vortexHeight = 25
-    }
+</head>
 
-    vars.frameNo++
-    requestAnimationFrame(function () {
-      frame(vars)
-    })
+<body>
+    <span class="mobile btn-mobile-menu">
+        <i class="social iconfont icon-list btn-mobile-menu__icon"></i>
+        <i class="social iconfont icon-angleup btn-mobile-close__icon hidden"></i>
+    </span>
+    <header id="panel" class="panel-cover">
+        <div class="panel-main">
+            <div class="panel-main__inner panel-inverted">
+                <div class="panel-main__content">
+                    <div class="ih-item circle effect right_to_left">            
+                        <a href="#" title="长按二维码关注公众号" class="blog-button">
+                            <div class="img"><img src="./img/logo3.jpg" alt="img" class="js-avatar iUp profilepic"></div>
+                            <div class="info iUp">
+                                <div class="info-back">
+                                   <img src="./img/logo1.jpg" alt="img" class="js-avatar iUp profilepic">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                   <h1 class="panel-cover__title panel-title iUp">
+                        <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzUzMTA0NTY1Mg==#wechat_redirectm" title="点击关注公众号">路上明珠•独家记忆</a>
+                    </h1>
+                    <p class="panel-cover__subtitle panel-subtitle iUp">玉米花吧</p>
+                    <hr class="panel-cover__divider iUp" />
+                    <p id="description" class="panel-cover__description iUp">如何得与凉风约，不共尘沙一并来!
+                        <br/>
+                        <strong>-「中牟道中」</strong>
+                    </p>
+                    <div class="navigation-wrapper iUp">
+                        <div>
+                            <nav class="cover-navigation cover-navigation--primary">
+                                <ul class="navigation">
+                                    <li class="navigation__item">
+                                       <a href="home" target="_blank"><i class="fa fa-home"></i>我的导航</a>
+                                    </li>
+                                    <li class="navigation__item">
+                                        <a href="https://tb.311716.com" target="_blank"><i class="fa fa-qq"></i>我的优惠</a>
+                                    </li>
+                                    <li class="navigation__item">
+                                        <a href="https://mp.weixin.qq.com/mp/homepage?__biz=MzUzMTA0NTY1Mg==&hid=5&sn=7335d441afc9f3e33b7be3132cc95752" target="_blank"><i class="fa fa-github"></i>系法学习</a>
+                                    </li>
+                                    <li class="navigation__item">
+                                       <a href="https://support.qq.com/products/364541/"target="_blank"><i class="fa fa-weibo"></i>留言反馈</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="iUp">
+                            <nav class="cover-navigation navigation--social">
+                                <ul class="navigation">
+                                    <li class="navigation__item">
+                                        <a href="https://jq.qq.com/?_wv=1027&k=ngrXD23w" title="QQ群" target="_blank">
+                                            <i class='social iconfont icon-github'></i>
+                                            <span class="label">QQ群</span>
+                                        </a>
+                                    </li>
+                                    <li class="navigation__item">
+                                        <a href="https://weibo.com/tlsilk" title="weibo" target="_blank">
+                                            <i class='social iconfont icon-weibo'></i>
+                                            <span class="label">weibo</span>
+                                        </a>
+                                    </li>
 
-    process(vars)
-    draw(vars)
-  }
-  frame()
-</script>
-    <div class="top astro-J7PV25F6">
-      <div class="width astro-J7PV25F6">
-        <div class="title astro-J7PV25F6">您所有的灵感都集中在一个地方</div>
-        <div class="subtitle astro-J7PV25F6">
-          跟我OppYmh问答绘画，让您的生活更加顺畅便捷。
-        </div>
-        <div class="btn chat astro-J7PV25F6" onclick="location.href='home/'">
-          开启灵感
-        </div>
-      </div>
-    </div>
-    <div class="sub astro-J7PV25F6">
-      <div class="width astro-J7PV25F6">
-        <div class="text astro-J7PV25F6">一句提问，一张绘画快速激发你的灵感。</div>
-        <div class="text1 astro-J7PV25F6">
-          面向专业领域的AI创意工具， 结合
-          <span class="text1-bold chat astro-J7PV25F6" onclick="location.href='home/'">趣味问答</span>
-          和
-          <span class="text1-bold draw astro-J7PV25F6" onclick="location.href='home/'"> 创意绘画</span>
-          两款强大的工具。
-        </div>
-      </div>
-    </div>
-
-    <div class="width astro-J7PV25F6">
-      <div class="module astro-J7PV25F6">
-        <div class="item draw astro-J7PV25F6">
-          <div class="module-left astro-J7PV25F6">
-            <img alt="" class="img astro-J7PV25F6" src="img/home.png">
-          </div>
-          <div class="module-right astro-J7PV25F6">
-            <div class="astro-J7PV25F6">
-              <div class="title astro-J7PV25F6">灵感绘图</div>
-              <div class="subtitle astro-J7PV25F6">
-                新创新，新想法，新构思，新视角<br class="astro-J7PV25F6">
-                让AI拓展你的灵感边界，体验不一样的世界吧！
-              </div>
-            </div>
-            <div class="button astro-J7PV25F6" style="margin-top: 9rem;">
-              <span class="astro-J7PV25F6" onclick="location.href='home/'">开始创作</span>
-              <div class="icon astro-J7PV25F6">
-                <i class="iconfont  icon-arrow-right astro-J7PV25F6"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="width astro-J7PV25F6">
-      <div class="module1 astro-J7PV25F6">
-        <div class="item module1-left draw astro-J7PV25F6">
-          <div class="astro-J7PV25F6">
-            <img alt="" class="img astro-J7PV25F6" src="img/home1.png">
-          </div>
-          <div class="module1-left-text astro-J7PV25F6">
-            <div class="astro-J7PV25F6">
-              <div class="title astro-J7PV25F6">3D盲盒人物</div>
-              <div class="subtitle astro-J7PV25F6">制作你的专属盲盒人物吧！</div>
-            </div>
-
-            <div class="button astro-J7PV25F6">
-              <span class="astro-J7PV25F6" onclick="location.href='home/'">开始创作</span>
-              <div class="icon astro-J7PV25F6">
-                <i class="iconfont  icon-arrow-right astro-J7PV25F6"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="module1-hr astro-J7PV25F6"></div>
-        <div class="module1-right astro-J7PV25F6">
-          <div class="item draw astro-J7PV25F6">
-            <div class="module1-right-img astro-J7PV25F6">
-              <img alt="" class="img astro-J7PV25F6" src="img/home2.png">
-            </div>
-            <div class="module1-right-text astro-J7PV25F6">
-              <div class="astro-J7PV25F6">
-                <div class="title astro-J7PV25F6">专属人物头像</div>
-                <div class="subtitle astro-J7PV25F6">制作你自己的Q版头像吧！</div>
-              </div>
-
-              <div class="button astro-J7PV25F6">
-                <span class="astro-J7PV25F6" onclick="location.href='home/'">开始创作</span><div class="icon astro-J7PV25F6">
-                  <i class="iconfont  icon-arrow-right astro-J7PV25F6"></i>
+                                    <li class="navigation__item">
+                                        <a href="https://www.zhihu.com/people/TanLuSilk" title="zhihu" target="_blank">
+                                            <i class='social iconfont icon-zhihu'></i>
+                                            <span class="label">zhihu</span>
+                                        </a>
+                                    </li>
+                                    <li class="navigation__item">
+                                        <a href="mailto:67729719@qq.com" title="email">
+                                            <i class='social iconfont icon-email'></i>
+                                            <span class="label">email</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="module1-hr astro-J7PV25F6"></div>
-          <div class="item chat astro-J7PV25F6">
-            <div class="module1-right-img astro-J7PV25F6">
-              <img alt="" class="img astro-J7PV25F6" src="img/home3.png">
-            </div>
-            <div class="module1-right-text astro-J7PV25F6">
-              <div class="astro-J7PV25F6">
-                <div class="title astro-J7PV25F6">超级问答</div>
-                <div class="subtitle astro-J7PV25F6">你想问的答案都在这里</div>
-              </div>
-              <div class="button astro-J7PV25F6">
-                <span class="astro-J7PV25F6" onclick="location.href='home/'">开始问答</span>
-                <div class="icon astro-J7PV25F6">
-                  <i class="iconfont  icon-arrow-right astro-J7PV25F6"></i>
-                </div>
-              </div>
-            </div>
-          </div>
+    <!-- 新增信息模块 -->
+    <div class="info-section">
+        <div class="info-card">
+            <h2>个人介绍</h2>
+            <p> 嘿，勇敢的探索者！欢迎闯入「独家记忆•路上明珠」，这绝非普通站点，而是通往记忆奇境的神秘入口。每段记忆皆为璀璨明珠，镶嵌在人生旅途，诉说着专属于你的独家传奇。从街头巷尾不期而遇的温暖，到远方异域震撼心灵的美景，都静静在此等候。在这里，你能打破时间桎梏，唤醒沉睡记忆，以全新视角重温往昔，挖掘那些被遗忘却满含力量的瞬间，一同挖掘记忆深处的无尽宝藏，开启一场难忘的心灵之旅！</p>
         </div>
-      </div>
+
+        <div class="info-card">
+            <h2>联系方式</h2>
+            <p>📧邮件：67729719@qq.com</p>
+            <p>⏰在线：星期一至星期天，全年无休</p>
+            <p>📞电话：+86-1373-2229-330</p>
+            <p>📍地址：浙江省杭州市临平区汀州花苑8幢</p>
+            <div style="margin-top:16px;">
+ 
+            </div>
+        </div>
     </div>
-    <div class="width astro-J7PV25F6">
-      <div class="module1_phone astro-J7PV25F6">
-        <div class="item draw astro-J7PV25F6">
-          <div class="astro-J7PV25F6">
-            <img alt="" class="img astro-J7PV25F6" src="img/home1.png">
-          </div>
-          <div class="module1-left-text astro-J7PV25F6">
-            <div class="astro-J7PV25F6">
-              <div class="title astro-J7PV25F6">3D盲盒人物</div>
-              <div class="subtitle astro-J7PV25F6">制作你的专属盲盒人物吧！</div>
             </div>
-            <div class="button astro-J7PV25F6">
-              <span class="astro-J7PV25F6" onclick="location.href='home/'">开始创作</span><div class="icon astro-J7PV25F6">
-                <i class="iconfont  icon-arrow-right astro-J7PV25F6"></i>
-              </div>
-            </div>
-          </div>
+            <div class="panel-cover--overlay cover-slate"></div>
+
+        <div class="remark iUp">
+            <p class="power">技术支持：独家记忆 备案号：<a href="https://beian.miit.gov.cn/" target="_blank"> 浙ICP备15006591号-3  </a></br>
+                 版权所有：路上明珠 备案号：<a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备15006591号-2 </a>
+            </p>
         </div>
-        <div class="module1_phone-hr astro-J7PV25F6"></div>
-        <div class="item draw astro-J7PV25F6">
-          <div class="astro-J7PV25F6">
-            <img alt="" class="img astro-J7PV25F6" src="img/home2.png">
-          </div>
-          <div class="module1-left-text astro-J7PV25F6">
-            <div class="astro-J7PV25F6">
-              <div class="title astro-J7PV25F6">专属人物头像</div>
-              <div class="subtitle astro-J7PV25F6">制作你自己的Q版头像吧！</div>
-            </div>
-            <div class="button astro-J7PV25F6">
-              <span class="astro-J7PV25F6" onclick="location.href='home/'">开始创作</span><div class="icon astro-J7PV25F6">
-                <i class="iconfont  icon-arrow-right astro-J7PV25F6"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="module1_phone-hr astro-J7PV25F6"></div>
-        <div class="item chat astro-J7PV25F6">
-          <div class="astro-J7PV25F6">
-            <img alt="" class="img astro-J7PV25F6" src="img/home3.png">
-          </div>
-          <div class="module1-left-text astro-J7PV25F6">
-            <div class="astro-J7PV25F6">
-              <div class="title astro-J7PV25F6">超级问答</div>
-              <div class="subtitle astro-J7PV25F6">你想问的答案都在这里</div>
-            </div>
-            <div class="button astro-J7PV25F6">
-              <span class="astro-J7PV25F6" onclick="location.href='home/'">开始创作</span><div class="icon astro-J7PV25F6">
-                <i class="iconfont  icon-arrow-right astro-J7PV25F6"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sub astro-J7PV25F6">
-      <div class="width astro-J7PV25F6">
-        <div class="text astro-J7PV25F6">未来已来，创作效率翻倍提升。</div>
-        <div class="text1 astro-J7PV25F6">
-          数字化创造时代的崛起：智能化工具唤醒创造新力，创造效率提升提升。
-        </div>
-      </div>
-    </div>
-
-    <div class="width astro-J7PV25F6">
-      <div class="module3 astro-J7PV25F6">
-        <div class="module3-item item draw astro-J7PV25F6">
-          <div class="module3-left astro-J7PV25F6">
-            <div class="astro-J7PV25F6">
-              <div class="title astro-J7PV25F6">AI 绘图</div>
-              <div class="subtitle astro-J7PV25F6">快速拓展你的灵感边界</div>
-            </div>
-            <div class="btn astro-J7PV25F6">
-              <span class="astro-J7PV25F6" onclick="location.href='home/'">开始创作</span>
-              <div class="icon astro-J7PV25F6">
-                <i class="iconfont  icon-arrow-right astro-J7PV25F6"></i>
-              </div>
-            </div>
-          </div>
-          <div class="module3-right astro-J7PV25F6">
-            <img alt="" class="img astro-J7PV25F6" src="img/home4.png">
-          </div>
-        </div>
-        <div class="module3-hr astro-J7PV25F6"></div>
-        <div class="module3-item item chat astro-J7PV25F6">
-          <div class="module3-left astro-J7PV25F6">
-            <div class="astro-J7PV25F6">
-              <div class="title astro-J7PV25F6">超级问答</div>
-              <div class="subtitle astro-J7PV25F6">快速解答你的疑问答惑</div>
-            </div>
-            <div class="btn astro-J7PV25F6">
-              <span class="astro-J7PV25F6" onclick="location.href='home/'">开始问答</span>
-              <div class="icon astro-J7PV25F6">
-                <i class="iconfont  icon-arrow-right astro-J7PV25F6"></i>                
-              </div>
-            </div>
-          </div>
-          <div class="module3-right astro-J7PV25F6">
-            <img alt="" class="img astro-J7PV25F6" src="img/home5.png">
-          </div>
-        </div>
-        <div class="module3-hr astro-J7PV25F6"></div>
-        </div>
-        </div>  
-<!-- 在最后一个</div>前添加以下代码 -->
-<div class="width astro-J7PV25F6" style="margin-top: 4rem;">
-  <!-- 关于我们 & 联系方式 -->
-  <div class="dual-columns astro-J7PV25F">
-    <!-- 关于我们 -->
-    <div class="about-card draw astro-J7PV25F6">
-      <div class="title astro-J7PV25F6">关于我们</div>
-      <div class="subtitle astro-J7PV25F6">
-        简绘AI是领先的智能创作平台，致力于通过AI技术赋能数字艺术创作。<br>
-        已服务超过50万创作者，生成作品超1000万件。
-      </div>
-      <div class="features astro-J7PV25F6">
-        <div class="feature-item astro-J7PV25F6">
-          <i class="iconfont icon-check astro-J7PV25F6"></i>
-          全链路创作支持
-        </div>
-        <div class="feature-item astro-J7PV25F6">
-          <i class="iconfont icon-check astro-J7PV25F6"></i>
-          7×24小时稳定服务
-        </div>
-      </div>
-    </div>
-
-    <!-- 联系方式 -->
-    <div class="contact-card chat astro-J7PV25F6">
-      <div class="title astro-J7PV25F6">联系我们</div>
-      <div class="contact-info astro-J7PV25F6">
-        <div class="info-item astro-J7PV25F6">
-          <i class="iconfont icon-email astro-J7PV25F6"></i>
-          service@jianhui.ai
-        </div>
-        <div class="info-item astro-J7PV25F6">
-          <i class="iconfont icon-phone astro-J7PV25F6"></i>
-          400-6688-888
-        </div>
-        <div class="info-item astro-J7PV25F6">
-          <i class="iconfont icon-location astro-J7PV25F6"></i>
-          北京市海淀区AI科技园B座18层
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 备案信息 -->
-<div class="beian-box astro-J7PV25F6">
-  <a href="https://beian.miit.gov.cn" target="_blank" class="beian-link astro-J7PV25F6">
-    京ICP备12345678号-2
-  </a>
-</div>
-
-<style>
-  /* 新增样式 */
-  .dual-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin: 2rem 0;
-  }
-
-  .about-card, .contact-card {
-    background: rgba(255,255,255,0.05);
-    border-radius: 16px;
-    padding: 2rem;
-    border: 1px solid rgba(82, 130, 255, 0.3);
-    backdrop-filter: blur(10px);
-  }
-
-  .features {
-    margin-top: 1.5rem;
-    display: grid;
-    gap: 1rem;
-  }
-
-  .feature-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    color: #8ab4f8;
-  }
-
-  .contact-info {
-    display: grid;
-    gap: 1.2rem;
-    margin-top: 1.5rem;
-  }
-
-  .info-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.95rem;
-  }
-
-  .beian-box {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(255,255,255,0.1);
-    padding: 8px 16px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-  }
-
-  .beian-link {
-    color: #8ab4f8!important;
-    font-size: 0.85rem;
-    text-decoration: none;
-  }
-
-  @media (max-width: 768px) {
-    .dual-columns {
-      grid-template-columns: 1fr;
-    }
-    
-    .beian-box {
-      right: 50%;
-      transform: translateX(50%);
-      width: max-content;
-    }
-  }
-</style>
-	</div>
-
-  <script type="text/javascript">
-    ;(function () {
-      const el = document.querySelector('body')
-      const theme = localStorage.getItem('THEME') ?? 'dark'
-      el.setAttribute('class', theme)
-      localStorage.setItem('THEME', theme)
-      const html = document.documentElement
-      function setFont() {
-        const cliWidth = html.clientWidth
-        if (cliWidth > 1920) {
-          html.style.fontSize = '16px'
-          return
-        }
-        html.style.fontSize =
-          (16 * (cliWidth / 1920) < 10 ? 10 : 16 * (cliWidth / 1920)) + 'px'
-      }
-      setFont()
-      window.onresize = function () {
-        setFont()
-      }
-    })()
-  </script>
-
+    </header>
+    <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/js/fetch.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
 </body>
+
 </html>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://hm.baidu.com/hm.js?25a072cef8c144689a0f8a7c934f685a"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4L0GELWRT2');
+</script>
